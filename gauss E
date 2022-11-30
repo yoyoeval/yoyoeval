@@ -1,0 +1,28 @@
+clc
+clear all
+A=[10 8 -3 1;2 10 1 -4;3 -4 10 1;2 2 -3 10];
+B=[16;9;10;11];
+n=max(size(A));
+m=eye(n);
+for j=1:n-1
+    for i=j+1:n
+        m(i,j)=A(i,j)/A(j,j);
+        A(i,:)=A(i,:)-(m(i,j)*A(j,:));
+        B(i,:)=B(i,:)-(m(i,j)*B(j,:));
+    end
+end
+a=[A B];
+display(A);
+display(B);
+display(m);
+display(n);
+x=zeros(n,1);
+x(n)=a(n,n+1)/a(n,n);
+for i=n-1:-1:1
+    sum=0;
+for j=i+1:n
+    sum=sum+a(i,j)*x(j);
+end
+x(i)=(a(i,n+1)-sum)/a(i,i);
+end
+x
