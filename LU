@@ -1,0 +1,18 @@
+%LU Factorisation
+clc
+clear all
+A = [1/3,1/2,-1/4;1/5,2/3,3/8;2/3,-2/3,5/8];
+%A = [2,-1,1;3,3,9;3,3,5];
+m = size(A,1); %size(A,1) gives number of rows in a matrix
+n = size(A,2); %size(A,2) gives number of columns in a matrix
+L = eye(size(A,1)); %eye(n) generates an identity matrix of size n
+% this will be converted to upper triangular matrix
+for j = 1 : n
+    for i = j+1 : m
+       L(i,j) = A(i,j)/A(j,j); %genertaing a lower triangular matrix with diagnols as 1 
+       A(i,:) = A(i,:)-L(i,j)*A(j,:); %genertaing a lower triangular matrix with diagnols as 1
+    end                              %L(i,j) = U(i,:) 
+
+end
+L
+A
